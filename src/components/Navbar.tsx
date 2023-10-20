@@ -8,13 +8,16 @@ export const Navbar = () => {
       <nav>
         <ul>
           <li>
-            <Link to='/images'>Mes images</Link>
-          </li>
-          <li>
             <Link to='/dashboard'>Dashboard</Link>
           </li>
           <li>
             <Link to='/profile'>Mon profil</Link>
+          </li>
+          <li>
+            <Link to='/login'>Connexion</Link>
+          </li>
+          <li>
+            <Link to='/register'>M'enregistrer</Link>
           </li>
         </ul>
       </nav>

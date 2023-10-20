@@ -5,15 +5,13 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Dashboard } from "./pages/Dashboard";
 import { Profile } from "./pages/Profile";
 import { Images } from "./pages/Images";
+import { Login } from "./pages/Login";
+import { Register } from "./pages/Register";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
-  },
-  {
-    path: "/images",
-    element: <App children={<Images />} />,
+    element: <App children={<Dashboard />} />,
   },
   {
     path: "/profile",
@@ -22,6 +20,14 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <App children={<Dashboard />} />,
+  },
+  {
+    path: "/login",
+    element: <App children={<Login />} />,
+  },
+  {
+    path: "/register",
+    element: <App children={<Register />} />,
   },
 ]);
 

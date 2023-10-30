@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { axiosServices } from "../utils/axiosServices";
+import { login } from "../utils/API";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -9,12 +10,7 @@ export const Login = () => {
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("logs : ", email, password);
-    return axiosServices
-      .post("/login", {
-        email,
-        password,
-      })
-      .then((res) => console.log("response : ", res));
+    login(email, password);
   };
 
   return (

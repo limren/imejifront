@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useState } from "react";
-import { getImages } from "../utils/API";
+import React, { useEffect, useState } from "react";
+import { getImages } from "../utils/API/Image";
 
 export const Dashboard = () => {
   const [imageFile, setImageFile] = useState(null);
@@ -12,21 +12,22 @@ export const Dashboard = () => {
     e.preventDefault();
     console.log("event : ", e);
   };
+
   console.log("data, status : ", images, status);
   return (
     <section>
       <header>
         <h2>Mes images récentes</h2>
         <form onSubmit={handleSubmit}>
-          <label htmlFor='image'>Ajoutez une image</label>
+          <label htmlFor='image'>Transformer mon image</label>
           <input type='file' id='image' name='image' />
           <input type='submit' />
         </form>
       </header>
       <main>
-        {images?.map((image) => (
-          <img key={image.id} src={image.path} />
-        ))}
+        {/* {images?.map((image) => (
+          <img key={image.id} src={image.path} alt='' />
+        ))} */}
       </main>
     </section>
   );

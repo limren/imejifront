@@ -25,7 +25,7 @@ export const Navbar = ({ isAuth }: { isAuth: boolean }) => {
     );
   };
   return (
-    <header>
+    <header className='navbar'>
       <h1>Imeji</h1>
       <nav>
         <ul>

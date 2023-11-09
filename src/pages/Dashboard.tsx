@@ -21,7 +21,7 @@ export const Dashboard = () => {
       <p onClick={() => setCreateImagePopUp((open) => !open)}>
         Ouverture de la popup
       </p>
-      <ImagePopUp open={createImgPopUp} />
+      <ImagePopUp open={createImgPopUp} setOpen={setCreateImagePopUp} />
       <div className={createImgPopUp ? `overlay` : `overlay hidden`}></div>
       <header>
         <h2>Mes images récentes</h2>

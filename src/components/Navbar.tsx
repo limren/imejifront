@@ -2,12 +2,12 @@ import React from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 import { logout } from "../utils/API";
-export const Navbar = ({ isAuth }: { isAuth: boolean }) => {
+export const Navbar = ({ isAuth, username }: { isAuth: boolean, username?:string }) => {
   const IsLogged = () => {
     return (
       <li>
         <Link to='#' onClick={logout}>
-          Me déconnecter
+          Bienvenue, {username}
         </Link>
       </li>
     );

@@ -3,6 +3,7 @@ import { Navbar } from "./components/Navbar";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "./App.css";
 import { getUser } from "./utils/API";
+import { User } from "./interfaces/User";
 // import { getUser } from "./utils/API";
 const queryClient = new QueryClient();
 function App({ children }: { children?: JSX.Element }) {
@@ -10,7 +11,7 @@ function App({ children }: { children?: JSX.Element }) {
     localStorage.getItem("auth-token") ? true : false
   );
   const [token, setToken] = useState(localStorage.getItem("auth-token"));
-  const [user, setUser] = useState();
+  const [user, setUser] = useState<User>();
   useEffect(() => {
     // getUser();
     // setCookie();
@@ -24,7 +25,7 @@ function App({ children }: { children?: JSX.Element }) {
   return (
     <QueryClientProvider client={queryClient}>
       <section className='App'>
-        <Navbar isAuth={isAuth} />
+        <Navbar isAuth={isAuth} username={user?.pseudo} />
         <main>{children}</main>
       </section>
     </QueryClientProvider>

@@ -1,24 +1,31 @@
 import React, { useState } from "react";
 import "../styles/ImagePopUp.css";
 import { Close } from "../assets/icons/Close";
-import { createImage } from "../utils/API/Image";
+import { createImage, getImages } from "../utils/API/Image";
 import { MessageError } from "../interfaces/utils/Message";
+import { useQuery } from "@tanstack/react-query";
 export const ImagePopUp = ({
   open,
   setOpen,
+  nbPage,
 }: {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  nbPage: number;
 }) => {
   console.log("boolean : ", open);
   const [file, setFile] = useState<File | null>(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<MessageError>({
     hasError: false,
     message: "",
   });
-  const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
+
+  const { refetch } = useQuery(["getImages", nbPage], () => getImages(nbPage));
+  const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
+    console.log("event");
     e.preventDefault();
     if (!file) {
       setError({
@@ -26,19 +33,22 @@ export const ImagePopUp = ({
         message: "Vous devez entrer un fichier !",
       });
     } else {
-      createImage({
+      setIsLoading(true);
+      await createImage({
         title: title,
         description: description,
         image: file,
       });
+      setIsLoading(false);
+      refetch();
+      setOpen(false);
     }
   };
-
   return (
     <section className={open ? `image-popup` : `image-popup hidden`}>
       <header>
         <h3>Création d'une image</h3>
-        <Close setOpen={setOpen} />
+        <Close setOpen={() => setOpen(false)} />
       </header>
       <main>
         <form onSubmit={handleSubmit}>

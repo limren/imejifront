@@ -1,0 +1,23 @@
+.card-image {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    gap: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+
+    & main {
+        & img {
+            width: 250px;
+            height: 250px;
+            object-fit: contain;
+        }
+
+
+    }
+
+    & footer {
+        align-self: flex-start;
+    }
+}

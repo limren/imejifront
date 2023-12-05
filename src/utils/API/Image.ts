@@ -2,8 +2,14 @@ import { CreationImage } from "../../interfaces/Image";
 import { axiosServices } from "../axiosServices";
 import { postOCR } from "./OCRApi";
 
-export const getImages = async () => {
-  const response = await axiosServices.get("/getImages");
+export const getImage = async (id: string | undefined) => {
+  const response = await axiosServices.get(`/getImage/${id}`);
+  console.log("response : ", response);
+  return response.data;
+};
+
+export const getImages = async (page = 0) => {
+  const response = await axiosServices.get(`/getImages/${page}`);
   console.log("response : ", response);
   return response.data;
 };

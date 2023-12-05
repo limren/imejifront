@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const postOCR = async (image: File) => {
+  console.log("posting");
   const headers = {
     "Content-Type": "multipart/form-data",
     apikey: process.env.REACT_APP_API_KEY,
@@ -14,5 +15,6 @@ export const postOCR = async (image: File) => {
     formData,
     { headers }
   );
+  console.log("response : ", response);
   return response.data.ParsedResults[0].ParsedText;
 };

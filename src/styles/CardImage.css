@@ -12,7 +12,12 @@
     & header {
         display: flex;
         flex-direction: column;
-        gap: 15px
+        gap: 15px;
+
+        & p {
+            width: 300px;
+            max-width: 100%;
+        }
     }
 
     & main {
@@ -28,4 +33,15 @@
     & footer {
         align-self: flex-start;
     }
+}
+
+@media screen and (max-width: 550px) {
+    .card-image {
+        & header {
+            & p {
+                max-width: 200px;
+            }
+        }
+    }
+
 }

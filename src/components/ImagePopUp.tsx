@@ -4,6 +4,7 @@ import { Close } from "../assets/icons/Close";
 import { createImage, getImages } from "../utils/API/Image";
 import { MessageError } from "../interfaces/utils/Message";
 import { useQuery } from "@tanstack/react-query";
+import * as obj from "../utils/Text";
 export const ImagePopUp = ({
   open,
   setOpen,
@@ -25,15 +26,27 @@ export const ImagePopUp = ({
     hasError: false,
     message: "",
   });
-
+  const [titleError, setTitleError] = useState({
+    boolean: false,
+    message: "",
+  });
+  const [descriptionError, setDescriptionError] = useState({
+    boolean: false,
+    message: "",
+  });
+  const lang = localStorage.getItem("lang") === "fr-FR" ? "fr" : "en";
   const { refetch } = useQuery(["getImages", nbPage], () => getImages(nbPage));
   const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     console.log("event");
     e.preventDefault();
+    if (titleError.boolean || descriptionError.boolean) return;
     if (!file) {
       setError({
         hasError: true,
-        message: "Vous devez entrer un fichier !",
+        message:
+          lang === "fr"
+            ? "Vous devez entrer un fichier !"
+            : "You must enter a file !",
       });
     } else {
       setIsLoading(true);
@@ -47,33 +60,76 @@ export const ImagePopUp = ({
       setOpen(false);
     }
   };
+
+  const objText = localStorage.getItem("lang") === "fr-FR" ? obj.fr : obj.eng;
   return (
     <section className={open ? `image-popup` : `image-popup hidden`}>
+      <section className={isLoading ? `overlay` : `hidden`}>
+        <p>{objText.addtxt}</p>
+      </section>
       <header>
-        <h3>Création d'une image</h3>
+        <h3>{objText.createimg}</h3>
         <section>
           <Close setOpen={() => setOpen(false)} />
         </section>
       </header>
       <main>
         <form onSubmit={handleSubmit}>
+          <label htmlFor="title">{objText.titleimg} :</label>
           <input
             id="title"
             name="title"
             type="text"
             required
-            placeholder="Titre de votre image"
-            onChange={(e) => setTitle(e.target.value)}
+            placeholder={objText.titleph}
+            onChange={(e) => {
+              if (e.target.value.length < 3) {
+                setTitleError({
+                  boolean: true,
+                  message:
+                    lang === "fr" ? "Titre trop court" : "Title too short",
+                });
+              } else if (titleError.boolean && e.target.value.length >= 3) {
+                setTitleError({
+                  boolean: false,
+                  message: "",
+                });
+              }
+              setTitle(e.target.value);
+            }}
           />
+          {titleError.boolean && <p className="error">{titleError.message}</p>}
+          <label htmlFor="description">{objText.descimg} :</label>
           <textarea
             id="description"
             name="description"
-            placeholder="Description de votre image"
-            onChange={(e) => setDescription(e.target.value)}
+            placeholder="Description"
+            onChange={(e) => {
+              if (e.target.value.length < 3) {
+                setDescriptionError({
+                  boolean: true,
+                  message:
+                    lang === "fr"
+                      ? "Description trop courte"
+                      : "Description too short",
+                });
+              } else if (
+                descriptionError.boolean &&
+                e.target.value.length >= 3
+              ) {
+                setDescriptionError({
+                  boolean: false,
+                  message: "",
+                });
+              }
+              setDescription(e.target.value);
+            }}
           />
-          {error.hasError && <p>{error.message}</p>}
-          <div>
-            <label htmlFor="file">Choix de l'image</label>
+          {descriptionError.boolean && (
+            <p className="error">{descriptionError.message}</p>
+          )}
+          <section>
+            <label htmlFor="file">{objText.choiceimg}</label>
             <input
               id="file"
               name="file"
@@ -88,8 +144,9 @@ export const ImagePopUp = ({
                 }
               }}
             />
-          </div>
-          <button type="submit">Envoyer le formulaire</button>
+            {error.hasError && <p className="error">{error.message}</p>}
+          </section>
+          <button type="submit">Créer la retranscription</button>
         </form>
       </main>
     </section>

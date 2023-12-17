@@ -8,34 +8,34 @@ import { Footer } from "./components/Footer";
 const queryClient = new QueryClient();
 function App({
   children,
+  createImgPopUp,
   isAuth,
-  token,
   user,
   setUser,
   setToken,
   setIsAuth,
 }: {
   user?: User;
+  createImgPopUp: boolean;
   setUser: React.Dispatch<React.SetStateAction<User | undefined>>;
   children?: JSX.Element;
   isAuth: boolean;
-  token: string | null;
   setToken: React.Dispatch<React.SetStateAction<string | null>>;
   setIsAuth: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   useEffect(() => {
-    // getUser();
-    // setCookie();
     const fetchUser = async () => {
       const data = await getUser();
       setUser(data);
     };
-    fetchUser();
-  }, []);
+    if (isAuth) {
+      fetchUser();
+    }
+  }, [isAuth, setUser]);
   console.log("navigator lang : ", navigator.language);
   return (
     <QueryClientProvider client={queryClient}>
-      <section className="App">
+      <section className={createImgPopUp ? `App overflow-hidden` : `App`}>
         <Navbar
           isAuth={isAuth}
           setToken={setToken}

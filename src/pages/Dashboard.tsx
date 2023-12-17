@@ -7,9 +7,14 @@ import { Image } from "../interfaces/Image";
 import "../styles/Dashboard.css";
 import { Link } from "react-router-dom";
 import { Create } from "../assets/icons/Create";
-export const Dashboard = () => {
+export const Dashboard = ({
+  createImgPopUp,
+  setCreateImagePopUp,
+}: {
+  createImgPopUp: boolean;
+  setCreateImagePopUp: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const [nbPage, setNbPage] = useState(1);
-  const [createImgPopUp, setCreateImagePopUp] = useState(false);
   const { data, status } = useQuery(["getImages", nbPage], () =>
     getImages(nbPage)
   );

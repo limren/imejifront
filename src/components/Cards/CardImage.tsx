@@ -12,7 +12,11 @@ export const CardImage = ({ image }: { image: Image }) => {
     <div className="card-image">
       <header>
         <h3>{image.title}</h3>
-        <p>{image.description}</p>
+        <p>
+          {image.description?.length! > 150
+            ? image.description?.substring(0, 150) + "..."
+            : image.description}
+        </p>
       </header>
       <main>
         <img src={`http://localhost:8000${image.path}`} alt={image.title} />

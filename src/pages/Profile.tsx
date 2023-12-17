@@ -29,7 +29,7 @@ export const Profile = ({
     <section className="profile">
       <header>
         <h1>{objText.profile}</h1>
-        <p onClick={handleLogout}>Me déconnecter</p>
+        <button onClick={handleLogout}>{objText.logout}</button>
       </header>
       <main>
         <section>
@@ -38,14 +38,12 @@ export const Profile = ({
           </header>
           <main>
             <section>
-              <section>
-                <h3>{objText.surname}</h3>
-                <p>{user?.surname}</p>
-              </section>
-              <section>
-                <h3>{objText.firstname}</h3>
-                <p>{user?.firstname}</p>
-              </section>
+              <h3>{objText.surname}</h3>
+              <p>{user?.surname}</p>
+            </section>{" "}
+            <section>
+              <h3>{objText.firstname}</h3>
+              <p>{user?.firstname}</p>
             </section>
             <section>
               <h3>Pseudo</h3>

@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { axiosServices } from "../utils/axiosServices";
 import { login } from "../utils/API";
 import { useNavigate } from "react-router-dom";
@@ -7,9 +7,11 @@ import "../styles/Login.css";
 import * as obj from "../utils/Text";
 
 export const Login = ({
+  isAuth,
   setIsAuth,
   setToken,
 }: {
+  isAuth: boolean;
   setIsAuth: React.Dispatch<React.SetStateAction<boolean>>;
   setToken: React.Dispatch<React.SetStateAction<string | null>>;
 }) => {
@@ -53,6 +55,11 @@ export const Login = ({
       navigate("/");
     }
   };
+  useEffect(() => {
+    if (isAuth) {
+      navigate("/");
+    }
+  }, [isAuth]);
   console.log("error mdp :", pwError, password.length);
   const objText = localStorage.getItem("lang") === "fr-FR" ? obj.fr : obj.eng;
   return (

@@ -19,6 +19,7 @@ const AppContainer = () => {
   const [isAuth, setIsAuth] = useState(false);
   const [token, setToken] = useState<string | null>(null);
   const [user, setUser] = useState<User>();
+  const [createImgPopUp, setCreateImagePopUp] = useState(false);
   useEffect(() => {
     setIsAuth(localStorage.getItem("auth-token") ? true : false);
     setToken(localStorage.getItem("auth-token"));
@@ -33,8 +34,8 @@ const AppContainer = () => {
           setUser={setUser}
           setIsAuth={setIsAuth}
           setToken={setToken}
+          createImgPopUp={createImgPopUp}
           isAuth={isAuth}
-          token={token}
           children={<Homepage />}
         />
       ),
@@ -48,7 +49,7 @@ const AppContainer = () => {
           setIsAuth={setIsAuth}
           setToken={setToken}
           isAuth={isAuth}
-          token={token}
+          createImgPopUp={createImgPopUp}
           children={
             <ProtectedRoute
               isAuth={isAuth}
@@ -73,8 +74,18 @@ const AppContainer = () => {
           setIsAuth={setIsAuth}
           setToken={setToken}
           isAuth={isAuth}
-          token={token}
-          children={<ProtectedRoute isAuth={isAuth} children={<Dashboard />} />}
+          createImgPopUp={createImgPopUp}
+          children={
+            <ProtectedRoute
+              isAuth={isAuth}
+              children={
+                <Dashboard
+                  createImgPopUp={createImgPopUp}
+                  setCreateImagePopUp={setCreateImagePopUp}
+                />
+              }
+            />
+          }
         />
       ),
     },
@@ -86,9 +97,11 @@ const AppContainer = () => {
           setUser={setUser}
           setIsAuth={setIsAuth}
           setToken={setToken}
+          createImgPopUp={createImgPopUp}
           isAuth={isAuth}
-          token={token}
-          children={<Login setIsAuth={setIsAuth} setToken={setToken} />}
+          children={
+            <Login isAuth={isAuth} setIsAuth={setIsAuth} setToken={setToken} />
+          }
         />
       ),
     },
@@ -100,8 +113,8 @@ const AppContainer = () => {
           setUser={setUser}
           setIsAuth={setIsAuth}
           setToken={setToken}
+          createImgPopUp={createImgPopUp}
           isAuth={isAuth}
-          token={token}
           children={<Register />}
         />
       ),
@@ -115,7 +128,7 @@ const AppContainer = () => {
           setIsAuth={setIsAuth}
           setToken={setToken}
           isAuth={isAuth}
-          token={token}
+          createImgPopUp={createImgPopUp}
           children={<Image />}
         />
       ),

@@ -16,7 +16,7 @@ export const eng = {
   intro1:
     "Welcome to Imeji, the groundbreaking platform that empowers you to freely translate your images effortlessly through its free API. Imeji provides you with a powerful API that allows you to translate your images without any request limitations, offering an unlimited experience.",
   intro2:
-    "This innovative service is built on an open-source project, underscoring our commitment to transparency and community collaboration. You can access the complete source code of the project on our GitHub page, fostering community participation and knowledge sharing.",
+    "This innovative service is built on an open-source project, underscoring our commitment to transparency and community collaboration. You can access the complete source code of the project on our GitLab page, fostering community participation and knowledge sharing.",
   intro3:
     "Explore the breadth of your possibilities with Imeji, where the convergence of technology, freedom of use, and open collaboration redefines how you interact with visual content.",
   freeapi: "A free API",
@@ -32,6 +32,13 @@ export const eng = {
   enterfirstname: "Enter your firstname :",
   entersurname: "Enter your surname :",
   registeraccount: "Register my Imeji's account",
+  password: "Password",
+  addtxt: "Adding in progress...",
+  createimg: "Creating an image",
+  titleimg: "Title of the image",
+  titleph: "Title",
+  descimg: "Description of the image",
+  choiceimg: "Choose an image",
 };
 
 export const fr = {
@@ -48,16 +55,16 @@ export const fr = {
   data: "Données",
   seeimage: "Voir ma galerie de photos",
   nbimage: "Nombre d'images créées",
-  intro: "Traduisez votre image librement",
+  intro: "Retranscrivez votre image librement",
   intro1:
-    "Bienvenue sur Imeji, la plateforme révolutionnaire vous offrant la liberté de traduire vos images en toute simplicité grâce à son API gratuite. Imeji met à votre disposition une API performante qui vous permet de traduire vos images sans aucune limitation de requêtes, offrant ainsi une expérience illimitée.",
+    "Bienvenue sur Imeji, la plateforme révolutionnaire vous offrant la liberté de retranscrire le texte vos images en toute simplicité grâce à son API gratuite. Imeji met à votre disposition une API performante qui vous permet de traduire vos images sans aucune limitation de requêtes, offrant ainsi une expérience illimitée.",
   intro2:
-    "Ce service novateur repose sur un projet open source, soulignant notre engagement envers la transparence et la collaboration communautaire. Vous avez la possibilité d'accéder au code source complet du projet sur notre page GitHub, favorisant ainsi la participation de la communauté et le partage des connaissances.",
+    "Ce service novateur repose sur un projet open source, soulignant notre engagement envers la transparence et la collaboration communautaire. Vous avez la possibilité d'accéder au code source complet du projet sur notre page GitLab, favorisant ainsi la participation de la communauté et le partage des connaissances.",
   intro3:
-    "Explorez l'étendue de vos possibilités avec Imeji, où la fusion de la technologie, de la liberté d'utilisation et de la collaboration ouverte redéfinit la manière dont vous interagissez avec le contenu visuel.",
+    "Explorez l'étendue de vos possibilités avec Imeji, où la fusion de la technologie, de la liberté d'utilisation et de la collaboration ouverte redéfinit la manière dont vous interagissez avec le contenu visuel !",
   freeapi: "Une API gratuite",
   freeapitxt:
-    "Imeji est un site web qui vous permet de traduire librement des images à l'aide d'une API.",
+    "Imeji est un site web qui vous permet de retranscrire librement des images à l'aide d'une API.",
   unlimitedrequest: "Requêtes illimitées",
   unlimitedrequesttxt:
     "Imeji vous permet de faire des demandes illimitées à l'API et de stocker des images comme vous le souhaitez. Profitez d'une flexibilité sans limites.",
@@ -68,4 +75,11 @@ export const fr = {
   enterfirstname: "Entrez votre prénom :",
   entersurname: "Entrez votre nom :",
   registeraccount: "Créer mon compte Imeji",
+  password: "Mot de passe",
+  addtxt: "Ajout en cours...",
+  createimg: "Création d'une image",
+  titleimg: "Titre de l'image",
+  titleph: "Titre",
+  descimg: "Description de l'image",
+  choiceimg: "Choisissez une image",
 };

@@ -70,16 +70,15 @@ export const Image = () => {
   };
   const handleConfirm = async () => {
     if (hasBeenModified()) return;
-
     setIsFetchingMod(true);
-    const response = await putImage({
+    await putImage({
       id: data.image.id,
       title: title,
       description: description,
       translatedText: translatedText,
     });
     setIsFetchingMod(false);
-    console.log("response : ", response);
+    setIsModifyMode(false);
   };
   return (
     <section className="image">
@@ -96,7 +95,7 @@ export const Image = () => {
                 onChange={(e) => setTitle(e.target.value)}
               />
               <textarea
-                rows={15}
+                rows={5}
                 cols={80}
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
@@ -117,7 +116,14 @@ export const Image = () => {
                 setIsModifyMode(false);
               }}
             >
-              <Close setOpen={() => setIsModifyMode(false)} />
+              <Close
+                setOpen={() => {
+                  setTitle(data.image.title);
+                  setDescription(data.image.description);
+                  setTranslatedText(data.image.translatedText);
+                  setIsModifyMode(false);
+                }}
+              />
             </section>
           ) : (
             <section className="modify" onClick={() => setIsModifyMode(true)}>
@@ -135,8 +141,13 @@ export const Image = () => {
           src={`http://localhost:8000${data.image.path}`}
           alt={data.image.title}
         />
+        {isModifyMode && (
+          <button disabled={hasBeenModified()} onClick={handleConfirm}>
+            Confirmer les changements
+          </button>
+        )}
         <textarea
-          rows={25}
+          rows={18}
           cols={150}
           disabled={!isModifyMode}
           value={translatedText}
@@ -147,11 +158,6 @@ export const Image = () => {
         <p>Création - {formattedCreatedDate}</p>
         <p>Dernière modification - {formattedUpdatedDate}</p>
       </footer>
-      {isModifyMode && (
-        <button disabled={hasBeenModified()} onClick={handleConfirm}>
-          Confirmer les changements
-        </button>
-      )}
     </section>
   );
 };

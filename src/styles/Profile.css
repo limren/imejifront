@@ -8,8 +8,19 @@
         align-items: center;
         justify-content: space-evenly;
 
-        & p {
+        & button {
+            border: none;
+            background-color: #EDEDED;
+            padding: 8px;
+            font-size: 16px;
+            border-radius: 8px;
             cursor: pointer;
+        }
+
+        & button:hover {
+            background-color: #ddd;
+            font-weight: 500;
+
         }
 
         & p:hover {
@@ -21,10 +32,11 @@
         }
     }
 
-    & main {
+    &>main {
         display: flex;
-        margin-top: 20px;
+        margin-top: 55px;
         text-align: center;
+        flex-wrap: wrap;
 
         &>section {
             flex: 1;
@@ -37,16 +49,16 @@
                 }
             }
 
-            & main {
+            &>main {
+                margin-top: 25px;
                 display: flex;
                 flex-direction: column;
+                gap: 15px;
 
                 & section {
-                    margin-bottom: 15px;
-
                     & h3 {
                         font-size: 18px;
-                        margin-bottom: 8px;
+                        margin-bottom: 3px;
                     }
 
                     & p {
@@ -65,4 +77,16 @@
             }
         }
     }
+}
+
+@media screen and (max-width: 750px) {
+    .profile {
+        &>main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px
+        }
+    }
+
 }

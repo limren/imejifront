@@ -3,6 +3,8 @@ import "./Navbar.css";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../utils/API";
 import * as obj from "../utils/Text";
+import { Profile } from "../assets/icons/Profile";
+import { Dashboard } from "../assets/icons/Dashboard";
 export const Navbar = ({
   isAuth,
   setIsAuth,
@@ -26,11 +28,14 @@ export const Navbar = ({
       navigate("/");
     }
   };
+  console.log("username: ", username);
   const IsLogged = () => {
     return (
       <li>
         <Link to="#" onClick={handleLogout}>
-          {objText.welcome} {username}
+          <h3>
+            {objText.welcome} {username}
+          </h3>
         </Link>
       </li>
     );
@@ -39,10 +44,12 @@ export const Navbar = ({
     return (
       <>
         <li>
-          <Link to="/login">{objText.login}</Link>
-        </li>
-        <li>
-          <Link to="/register">{objText.register}</Link>
+          <Link to="/login">
+            <h3>{objText.login}</h3>
+          </Link>
+          <Link to="/register">
+            <h3>{objText.register}</h3>
+          </Link>
         </li>
       </>
     );
@@ -57,10 +64,16 @@ export const Navbar = ({
       <nav>
         <ul>
           <li>
-            <Link to="/dashboard">{objText.dashboard}</Link>
+            <Link to="/dashboard">
+              <Dashboard />
+              <h3 className="li-subtitle">{objText.dashboard}</h3>
+            </Link>
           </li>
           <li>
-            <Link to="/profile">{objText.profile}</Link>
+            <Link to="/profile">
+              <Profile />
+              <h3 className="li-subtitle">{objText.profile}</h3>
+            </Link>
           </li>
           {isAuth ? <IsLogged /> : <IsNotLogged />}
         </ul>

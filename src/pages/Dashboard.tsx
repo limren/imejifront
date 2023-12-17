@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { getImages } from "../utils/API/Image";
 import { ImagePopUp } from "../components/ImagePopUp";
 import { CardImage } from "../components/Cards/CardImage";
@@ -7,6 +7,7 @@ import { Image } from "../interfaces/Image";
 import "../styles/Dashboard.css";
 import { Link } from "react-router-dom";
 import { Create } from "../assets/icons/Create";
+import * as obj from "../utils/Text";
 export const Dashboard = ({
   createImgPopUp,
   setCreateImagePopUp,
@@ -15,13 +16,9 @@ export const Dashboard = ({
   setCreateImagePopUp: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const [nbPage, setNbPage] = useState(1);
-  const { data, status } = useQuery(["getImages", nbPage], () =>
-    getImages(nbPage)
-  );
+  const { data } = useQuery(["getImages", nbPage], () => getImages(nbPage));
   const [isLoading, setIsLoading] = useState(false);
-
-  console.log("data, status : ", data?.images, status);
-
+  const objTxt = localStorage.getItem("lang") === "fr-FR" ? obj.fr : obj.eng;
   return (
     <section className="dashboard">
       <section className={isLoading ? `overlay` : `hidden`}>
@@ -36,10 +33,10 @@ export const Dashboard = ({
       />
       <div className={createImgPopUp ? `overlay` : `overlay hidden`}></div>
       <header>
-        <h2>Mes images</h2>
+        <h2>{objTxt.gallery}</h2>
         <section onClick={() => setCreateImagePopUp((open) => !open)}>
           <Create />
-          <p>Ajouter une image</p>
+          <p>{objTxt.addimage}</p>
         </section>
       </header>
       <main>
@@ -51,11 +48,11 @@ export const Dashboard = ({
       </main>
       <footer>
         {Array.from(
-          { length: data?.total / 20 + 1 },
+          { length: data?.total / 10 + 1 },
           (_, index) => index + 1
         ).map((page) => {
           return (
-            <span
+            <p
               key={page}
               onClick={() => setNbPage(page)}
               style={{
@@ -64,7 +61,7 @@ export const Dashboard = ({
               }}
             >
               {page}
-            </span>
+            </p>
           );
         })}
       </footer>

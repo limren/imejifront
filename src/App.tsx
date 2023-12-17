@@ -32,7 +32,6 @@ function App({
       fetchUser();
     }
   }, [isAuth, setUser]);
-  console.log("navigator lang : ", navigator.language);
   return (
     <QueryClientProvider client={queryClient}>
       <section className={createImgPopUp ? `App overflow-hidden` : `App`}>

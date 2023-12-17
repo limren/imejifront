@@ -45,12 +45,9 @@ export const Login = ({
       });
       return;
     }
-    console.log("logs : ", email, password);
     const response = await login(email, password);
-    console.log("respojnse : ", response);
     if (response?.status === 200) {
       setIsAuth(true);
-      console.log("token : ", response.data.token);
       setToken(response.data.token);
       navigate("/");
     }
@@ -60,7 +57,6 @@ export const Login = ({
       navigate("/");
     }
   }, [isAuth]);
-  console.log("error mdp :", pwError, password.length);
   const objText = localStorage.getItem("lang") === "fr-FR" ? obj.fr : obj.eng;
   return (
     <section className="login">
@@ -103,7 +99,6 @@ export const Login = ({
                 id="password"
                 className={pwError.boolean ? "error" : ""}
                 onChange={(e) => {
-                  console.log("e : ", e.target.value, "password : ", password);
                   if (e.target.value.length < 8 && !pwError.boolean) {
                     setPwError({
                       boolean: true,

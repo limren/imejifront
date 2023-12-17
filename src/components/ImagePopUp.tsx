@@ -18,7 +18,6 @@ export const ImagePopUp = ({
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   nbPage: number;
 }) => {
-  console.log("boolean : ", open);
   const [file, setFile] = useState<File | null>(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -37,7 +36,6 @@ export const ImagePopUp = ({
   const lang = localStorage.getItem("lang") === "fr-FR" ? "fr" : "en";
   const { refetch } = useQuery(["getImages", nbPage], () => getImages(nbPage));
   const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
-    console.log("event");
     e.preventDefault();
     if (titleError.boolean || descriptionError.boolean) return;
     if (!file) {
@@ -146,7 +144,7 @@ export const ImagePopUp = ({
             />
             {error.hasError && <p className="error">{error.message}</p>}
           </section>
-          <button type="submit">Créer la retranscription</button>
+          <button type="submit">{objText.createretrans}</button>
         </form>
       </main>
     </section>

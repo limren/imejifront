@@ -28,7 +28,6 @@ export const Navbar = ({
       navigate("/");
     }
   };
-  console.log("username: ", username);
   const IsLogged = () => {
     return (
       <li>

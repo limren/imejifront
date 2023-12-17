@@ -6,6 +6,7 @@ import "../../styles/Image.css";
 import { Edit } from "../../assets/icons/Edit";
 import { Delete } from "../../assets/icons/Delete";
 import { Close } from "../../assets/icons/Close";
+import * as obj from "../../utils/Text";
 export const Image = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -23,40 +24,40 @@ export const Image = () => {
   const [isFetchingMod, setIsFetchingMod] = useState(false);
   const [isModifyMode, setIsModifyMode] = useState(false);
   const navigate = useNavigate();
+
+  const lang = localStorage.getItem("lang");
   const formattedCreatedDate = new Date(
     data?.image.created_at
-  ).toLocaleDateString("fr-FR", {
+  ).toLocaleDateString(lang ? lang : "en-EN", {
     year: "numeric",
     month: "long",
     day: "numeric",
   });
   const formattedUpdatedDate = new Date(
     data?.image.updated_at
-  ).toLocaleDateString("fr-FR", {
+  ).toLocaleDateString(lang ? lang : "en-EN", {
     year: "numeric",
     month: "long",
     day: "numeric",
   });
-
+  const objTxt = localStorage.getItem("lang") === "fr-FR" ? obj.fr : obj.eng;
   useEffect(() => {
     if (data) {
-      console.log("data : ", data);
       setTitle(data.image.title);
       setDescription(data.image.description);
       setTranslatedText(data.image.translatedText);
     }
   }, [data]);
   if (isLoading) {
-    return <>Chargement...</>;
+    return <>{objTxt.loading}</>;
   }
   if (!data || error) {
-    return <>Une erreur s'est produite</>;
+    return <>{objTxt.errorhappened}</>;
   }
   const handleDelete = async () => {
     setIsFetching(true);
     const response = await deleteImage(data.image.id);
     setIsFetching(false);
-    console.log("response : ", response);
     if (response.success) {
       navigate("/dashboard");
     }
@@ -143,7 +144,7 @@ export const Image = () => {
         />
         {isModifyMode && (
           <button disabled={hasBeenModified()} onClick={handleConfirm}>
-            Confirmer les changements
+            {objTxt.confirmchanges}
           </button>
         )}
         <textarea
@@ -155,8 +156,12 @@ export const Image = () => {
         />
       </main>
       <footer>
-        <p>Création - {formattedCreatedDate}</p>
-        <p>Dernière modification - {formattedUpdatedDate}</p>
+        <p>
+          {objTxt.creation} - {formattedCreatedDate}
+        </p>
+        <p>
+          {objTxt.latestmodif} - {formattedUpdatedDate}
+        </p>
       </footer>
     </section>
   );

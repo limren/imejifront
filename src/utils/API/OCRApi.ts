@@ -1,13 +1,13 @@
 import axios from "axios";
 
 export const postOCR = async (image: File) => {
-  console.log("posting");
   const headers = {
     "Content-Type": "multipart/form-data",
     apikey: process.env.REACT_APP_API_KEY,
   };
   const formData = new FormData();
-  formData.append("language", "fre");
+  const lang = localStorage.getItem("lang") === "fr-FR" ? "fre" : "eng";
+  formData.append("language", lang);
   formData.append("file", image);
   formData.append("isOverlayRequired", "false");
   const response = await axios.post(
@@ -15,6 +15,5 @@ export const postOCR = async (image: File) => {
     formData,
     { headers }
   );
-  console.log("response : ", response);
   return response.data.ParsedResults[0].ParsedText;
 };

@@ -39,6 +39,17 @@ export const eng = {
   titleph: "Title",
   descimg: "Description of the image",
   choiceimg: "Choose an image",
+  about: "About Imeji",
+  followmedia: "Follow us on social media",
+  goal: "Our goal",
+  loading: "Loading...",
+  errorhappened: "An error happened, please try again later.",
+  gallery: "My gallery",
+  addimage: "Add an image",
+  creation: "Creation",
+  latestmodif: "Latest modifications",
+  confirmchanges: "Confirm changes",
+  createretrans: "Create a retranscription",
 };
 
 export const fr = {
@@ -82,4 +93,15 @@ export const fr = {
   titleph: "Titre",
   descimg: "Description de l'image",
   choiceimg: "Choisissez une image",
+  about: "A propos de Imeji",
+  followmedia: "Suivez-nous sur les réseaux sociaux",
+  goal: "Notre but",
+  loading: "Chargement...",
+  errorhappened: "Une erreur est survenue, veuillez réessayer plus tard.",
+  gallery: "Ma galerie",
+  addimage: "Ajouter une image",
+  creation: "Création",
+  latestmodif: "Dernières modifications",
+  confirmchanges: "Confirmer les modifications",
+  createretrans: "Créer une retranscription",
 };

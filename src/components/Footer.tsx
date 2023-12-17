@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/Footer.css";
+import * as obj from "../utils/Text";
 export const Footer = () => {
+  const objText = localStorage.getItem("lang") === "fr-FR" ? obj.fr : obj.eng;
+
   return (
     <section className="footer">
       <header>
@@ -10,12 +13,12 @@ export const Footer = () => {
       <main className="footer-about">
         <ul>
           <li>
-            <Link to="/">A propos de Imeji</Link>
+            <Link to="/">{objText.about}</Link>
           </li>
-          <li>Carrière</li>
+          <li>{objText.goal}</li>
           <li>
             <section className="footer-links">
-              <h4>Suivez-nous sur les réseaux sociaux</h4>
+              <h4>{objText.followmedia}</h4>
               <section>
                 <img
                   src="./assets/instagram.svg"

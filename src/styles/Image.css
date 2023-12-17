@@ -5,8 +5,6 @@
     padding: 15px;
     align-items: center;
 
-
-
     & .hidden {
         display: none;
     }
@@ -40,6 +38,10 @@
         align-items: center;
         width: 100%;
         padding: 10px 40px;
+
+        & h2 {
+            max-width: 450px;
+        }
 
         & section:first-child {
             display: flex;
@@ -141,5 +143,30 @@
     & button:hover {
         background-color: green;
         color: #fff;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .image {
+        & header {
+            flex-direction: column;
+            text-align: center;
+            align-items: center;
+            gap: 20px;
+
+            & h2 {
+                font-size: 20px;
+            }
+
+            & p {
+                font-size: 16px;
+            }
+        }
+
+        & footer {
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+        }
     }
 }

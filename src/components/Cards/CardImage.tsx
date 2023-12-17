@@ -2,12 +2,15 @@ import React from "react";
 import { Image } from "../../interfaces/Image";
 import "../../styles/CardImage.css";
 export const CardImage = ({ image }: { image: Image }) => {
-  console.log("image : ", image);
-  const formattedDate = new Date(image.created_at).toLocaleDateString("fr-FR", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  const lang = localStorage.getItem("lang");
+  const formattedDate = new Date(image.created_at).toLocaleDateString(
+    lang ? lang : "en-EN",
+    {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    }
+  );
   return (
     <div className="card-image">
       <header>

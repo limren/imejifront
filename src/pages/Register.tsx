@@ -233,7 +233,7 @@ export const Register = () => {
               />
               {pwError.boolean && <p className="error">{pwError.message}</p>}
             </section>{" "}
-            <input type="submit" value="M'enregistrer" />
+            <input type="submit" value={objTxt.register} />
           </form>
         </main>
       </section>

@@ -7,6 +7,14 @@
     border-radius: 5px;
     cursor: pointer;
 
+
+
+    & header {
+        display: flex;
+        flex-direction: column;
+        gap: 15px
+    }
+
     & main {
         & img {
             width: 250px;

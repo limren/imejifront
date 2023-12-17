@@ -1,19 +1,25 @@
 import { useState } from "react";
 import { axiosServices } from "../utils/axiosServices";
+import * as obj from "../utils/Text";
+import "../styles/Register.css";
 export const Register = () => {
-  const [error, setError] = useState<{
-    hasError: boolean;
-    textError: string;
-  }>({
-    hasError: false,
-    textError: "",
-  });
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstname, setFirstname] = useState("");
   const [surname, setSurname] = useState("");
   const [pseudo, setPseudo] = useState("");
-
+  const [emailError, setEmailError] = useState({
+    boolean: false,
+    message: "",
+  });
+  const [pwError, setPwError] = useState({
+    boolean: false,
+    message: "",
+  });
+  const [pseudoError, setPseudoError] = useState({
+    boolean: false,
+    message: "",
+  });
   const handleRegister = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -26,48 +32,78 @@ export const Register = () => {
       pseudo: pseudo,
     });
   };
+  const lang = localStorage.getItem("lang") === "fr-FR" ? "fr" : "en";
+  const objTxt = localStorage.getItem("lang") === "fr-FR" ? obj.fr : obj.eng;
   return (
-    <section>
+    <section className="register">
       <header>
-        <h2>Enregistrement de mon compte Imeji</h2>
+        <h1>{objTxt.registeraccount}</h1>
       </header>
       <main>
         <form onSubmit={handleRegister}>
           <section>
+            <label htmlFor="firstname">{objTxt.enterfirstname}</label>
             <input
-              type='text'
+              type="text"
+              id="firstname"
               required
-              placeholder='Entrez votre prénom'
+              placeholder={objTxt.firstname}
               onChange={(e) => setFirstname(e.target.value)}
             />
+          </section>
+          <section>
+            <label htmlFor="surname">{objTxt.enterfirstname}</label>
             <input
-              type='text'
+              type="text"
+              id="surname"
               required
-              placeholder='Entrez votre nom de famille'
+              placeholder={objTxt.entersurname}
               onChange={(e) => setSurname(e.target.value)}
             />
           </section>
           <section>
+            <label htmlFor="pseudo">{objTxt.enterpseudo}</label>
             <input
-              type='text'
+              type="text"
+              id="pseudo"
               required
-              placeholder='Entrez votre pseudo'
+              placeholder="Pseudo"
               onChange={(e) => setPseudo(e.target.value)}
             />
+          </section>{" "}
+          <section>
+            <label htmlFor="email">{objTxt.enteremail}</label>
             <input
-              type='email'
+              type="email"
+              id="email"
               required
-              placeholder='Entrez votre email'
+              placeholder={objTxt.email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </section>{" "}
-          <input
-            type='password'
-            required
-            placeholder='Entrez votre mot de passe'
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <input type='submit' value="M'enregistrer" />
+          <section>
+            <label htmlFor="password">{objTxt.enterpassword}</label>
+            <input
+              type="password"
+              id="password"
+              required
+              placeholder={objTxt.enterpassword}
+              onChange={(e) => {
+                if (e.target.value.length < 8 && !pwError.boolean) {
+                  setPwError({
+                    boolean: true,
+                    message:
+                      lang === "fr"
+                        ? "Mot de passe trop court"
+                        : "Password too short",
+                  });
+                }
+                setPassword(e.target.value);
+              }}
+            />
+            {pwError.boolean && <p className="error">{pwError.message}</p>}
+          </section>{" "}
+          <input type="submit" value="M'enregistrer" />
         </form>
       </main>
     </section>

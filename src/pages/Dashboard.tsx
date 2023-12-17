@@ -6,31 +6,40 @@ import { CardImage } from "../components/Cards/CardImage";
 import { Image } from "../interfaces/Image";
 import "../styles/Dashboard.css";
 import { Link } from "react-router-dom";
+import { Create } from "../assets/icons/Create";
 export const Dashboard = () => {
   const [nbPage, setNbPage] = useState(1);
   const [createImgPopUp, setCreateImagePopUp] = useState(false);
   const { data, status } = useQuery(["getImages", nbPage], () =>
     getImages(nbPage)
   );
+  const [isLoading, setIsLoading] = useState(false);
+
   console.log("data, status : ", data?.images, status);
 
   return (
     <section className="dashboard">
+      <section className={isLoading ? `overlay` : `hidden`}>
+        <p>Création de l'image en cours...</p>
+      </section>
       <ImagePopUp
         nbPage={nbPage}
         open={createImgPopUp}
         setOpen={setCreateImagePopUp}
+        isLoading={isLoading}
+        setIsLoading={setIsLoading}
       />
       <div className={createImgPopUp ? `overlay` : `overlay hidden`}></div>
       <header>
-        <h2>Mes images récentes</h2>
-        <p onClick={() => setCreateImagePopUp((open) => !open)}>
-          Ouverture de la popup
-        </p>
+        <h2>Mes images</h2>
+        <section onClick={() => setCreateImagePopUp((open) => !open)}>
+          <Create />
+          <p>Ajouter une image</p>
+        </section>
       </header>
       <main>
         {data?.images?.map((image: Image) => (
-          <Link to={`/image/${image.id}`}>
+          <Link to={`/image/${image.id}`} key={image.id}>
             <CardImage image={image} />
           </Link>
         ))}
@@ -42,6 +51,7 @@ export const Dashboard = () => {
         ).map((page) => {
           return (
             <span
+              key={page}
               onClick={() => setNbPage(page)}
               style={{
                 color: page === nbPage ? "red" : "",

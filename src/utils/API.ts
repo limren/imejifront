@@ -23,7 +23,7 @@ export const login = async (email: string, password: string) => {
     });
     const token = response.data.token;
     localStorage.setItem("auth-token", token);
-    return response.data;
+    return response;
   } catch (err) {
     console.log("err while logging in :", err);
   }

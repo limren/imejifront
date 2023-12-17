@@ -11,6 +11,30 @@
   box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
   z-index: 10;
 
+  & .hidden {
+    display: none;
+  }
+
+  & .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: .5;
+    background-color: #000;
+    transition: .5s ease;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & p {
+      color: #fff;
+      font-size: 20px;
+    }
+  }
+
   & header {
     display: flex;
     justify-content: space-between;
@@ -18,28 +42,33 @@
     border-bottom: 1px solid black;
     padding-bottom: 10px;
   }
+
   & main {
     & p {
       color: red;
       font-size: 20px;
     }
   }
+
   & main form {
-    padding:10px;
-    display:flex;
+    padding: 10px;
+    display: flex;
     flex-direction: column;
-    gap:20px;
-    & input[type="text"], & textarea {
-      padding:10px;
+    gap: 20px;
+
+    & input[type="text"],
+    & textarea {
+      padding: 10px;
     }
-    & div{
-      display:flex;
+
+    & div {
+      display: flex;
       flex-direction: column;
-      gap:10px;
+      gap: 10px;
     }
   }
 
-  
+
 }
 
 .hidden {

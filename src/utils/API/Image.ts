@@ -1,4 +1,4 @@
-import { CreationImage } from "../../interfaces/Image";
+import { CreationImage, PutImage } from "../../interfaces/Image";
 import { axiosServices } from "../axiosServices";
 import { postOCR } from "./OCRApi";
 
@@ -27,4 +27,16 @@ export const createImage = async (Image: CreationImage) => {
 
   const response = await axiosServices.post("/createImage", formData);
   console.log("response : ", response);
+};
+
+export const putImage = async (Image: PutImage) => {
+  const response = await axiosServices.put(`/putImage`, Image);
+  console.log("response : ", response);
+  return response.data;
+};
+
+export const deleteImage = async (id: string | undefined) => {
+  const response = await axiosServices.delete(`/deleteImage/${id}`);
+  console.log("response : ", response);
+  return response.data;
 };

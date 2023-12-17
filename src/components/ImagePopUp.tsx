@@ -8,16 +8,19 @@ export const ImagePopUp = ({
   open,
   setOpen,
   nbPage,
+  isLoading,
+  setIsLoading,
 }: {
   open: boolean;
+  isLoading: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   nbPage: number;
 }) => {
   console.log("boolean : ", open);
   const [file, setFile] = useState<File | null>(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<MessageError>({
     hasError: false,
     message: "",
@@ -48,7 +51,9 @@ export const ImagePopUp = ({
     <section className={open ? `image-popup` : `image-popup hidden`}>
       <header>
         <h3>Création d'une image</h3>
-        <Close setOpen={() => setOpen(false)} />
+        <section>
+          <Close setOpen={() => setOpen(false)} />
+        </section>
       </header>
       <main>
         <form onSubmit={handleSubmit}>

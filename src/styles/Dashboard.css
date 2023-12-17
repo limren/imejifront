@@ -1,4 +1,27 @@
 .dashboard {
+    padding: 20px;
+    margin-top: 13px;
+
+    &>header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        padding: 10px;
+
+        & section {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+
+            & p {
+                font-size: 16px;
+                font-weight: 600;
+            }
+        }
+    }
+
     & main {
         display: flex;
         flex-wrap: wrap;
@@ -6,6 +29,7 @@
         justify-content: center;
         gap: 20px;
         padding: 10px;
+        margin-top: 25px;
     }
 
     & footer {
